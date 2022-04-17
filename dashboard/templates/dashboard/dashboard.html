@@ -3,5 +3,9 @@
 
     <h1>Welcome to your dashboard!</h1>
     <p>What would you like to do today?</p>
+    {% for x in accounts %}
+        <p>{{ x.business_name }}</p>
+        <p>{{ x.account_owner }}</p>
+    {% endfor %}
 
 {% endblock content %}
