@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import dj_database_url
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -32,7 +33,10 @@ ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
 # Application definition
 
 INSTALLED_APPS = [
+    'whitenoise.runserver_nostatic',
+    'users.apps.UsersConfig',
     'dashboard.apps.DashboardConfig',
+    'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -43,6 +47,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -83,7 +88,7 @@ WSGI_APPLICATION = 'crm.wsgi.application'
 # }
 
 DATABASES = {
-    'default': dj_database_url.parse('postgres://abbifblstdbpti:762455616a8a6bdb35286dbfe63a7562560a47b0dc53afc0050bcac6a4d7cd86@ec2-52-18-116-67.eu-west-1.compute.amazonaws.com:5432/d350apa56lnt57')
+    'default': dj_database_url.parse('postgres://ogxxzeczixiaip:ab7821ccd90b484f19e71bc808f000cc0e6029a7788cf8ba069769aa54ffaf72@ec2-34-246-227-219.eu-west-1.compute.amazonaws.com:5432/df4kpqb2hl3pu9')
 }
 
 
@@ -127,3 +132,12 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+LOGIN_REDIRECT_URL = 'main-dashboard'
+LOGIN_URL = 'login'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
